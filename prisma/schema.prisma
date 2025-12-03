@@ -1,0 +1,295 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL_USR_ADM")
+  schemas  = ["acs", "cad", "dsh", "etl", "log", "public", "vew"]
+}
+
+model prm {
+  prm_id     Int       @id @default(autoincrement())
+  prm_cod    String    @unique @db.VarChar(100)
+  prm_nme    String    @db.VarChar(150)
+  prm_grp    String    @db.VarChar(100)
+  stt_id     Int       @default(1)
+  usr_id_alt Int
+  dta_alt    DateTime  @default(now()) @db.Timestamp(6)
+  mtv_del    String?   @db.VarChar(250)
+  stt        stt       @relation(fields: [stt_id], references: [stt_id], onUpdate: Restrict, map: "fk_prm_stt")
+  usr_prm    usr_prm[]
+
+  @@schema("acs")
+}
+
+model usr {
+  emp_id     Int
+  usr_tpo_id Int
+  usr_id     Int       @id @default(autoincrement())
+  usr_nme    String    @db.VarChar(150)
+  usr_lgn    String?   @unique @db.VarChar(20)
+  usr_cpf    String?   @unique @db.VarChar(15)
+  usr_eml    String?   @unique @db.VarChar(150)
+  usr_fne    String?   @db.VarChar(20)
+  usr_pwd    String    @db.VarChar(250)
+  usr_fto    String?   @default("avatar.png") @db.VarChar(250)
+  stt_id     Int       @default(1)
+  usr_id_alt Int
+  dta_alt    DateTime  @default(now()) @db.Timestamptz(6)
+  mtv_del    String?   @db.VarChar(250)
+  stt        stt       @relation(fields: [stt_id], references: [stt_id], onDelete: NoAction, onUpdate: NoAction)
+  usr_tpo    usr_tpo   @relation(fields: [usr_tpo_id], references: [usr_tpo_id], onDelete: NoAction, onUpdate: NoAction)
+  usr_prm    usr_prm[]
+
+  @@index([stt_id], map: "idx_usr_stt_id")
+  @@schema("acs")
+}
+
+model usr_prm {
+  usr_id     Int
+  prm_id     Int
+  prm_atu    Boolean  @default(true)
+  prm_ops    String   @default("000000") @db.VarChar(6)
+  usr_id_alt Int
+  dta_alt    DateTime @default(now()) @db.Timestamp(6)
+  mtv_del    String?  @db.VarChar(250)
+  prm        prm      @relation(fields: [prm_id], references: [prm_id], onDelete: Cascade, map: "fk_usr_prm_prm")
+  usr        usr      @relation(fields: [usr_id], references: [usr_id], onDelete: Cascade, map: "fk_usr_prm_usr")
+
+  @@id([usr_id, prm_id])
+  @@index([prm_id], map: "idx_usr_prm_prm")
+  @@index([usr_id], map: "idx_usr_prm_usr")
+  @@schema("acs")
+}
+
+model usr_tpo {
+  usr_tpo_id  Int      @id @default(autoincrement())
+  usr_tpo_nme String   @unique @db.VarChar(50)
+  stt_id      Int      @default(1)
+  usr_id_alt  Int
+  dta_alt     DateTime @default(now()) @db.Timestamptz(6)
+  mtv_del     String?  @db.VarChar(250)
+  usr         usr[]
+  stt         stt      @relation(fields: [stt_id], references: [stt_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([stt_id], map: "idx_usr_tpo_stt_id")
+  @@schema("acs")
+}
+
+model emp {
+  emp_id      Int      @id @default(autoincrement())
+  emp_nme     String   @db.VarChar(150)
+  emp_raz     String?  @db.VarChar(150)
+  emp_rdz     String?  @db.VarChar(15)
+  emp_atv     String?  @db.VarChar(150)
+  emp_cnpj    String?  @db.VarChar(20)
+  end_uf      String?  @db.VarChar(2)
+  end_cdd     String?  @db.VarChar(50)
+  end_ltt     String?  @db.VarChar(20)
+  end_lgt     String?  @db.VarChar(20)
+  end_cep     String?  @db.VarChar(20)
+  end_emp     String?  @db.VarChar(150)
+  end_cpl     String?  @db.VarChar(100)
+  end_lgo     String?  @db.VarChar(150)
+  end_url     String?  @db.VarChar(150)
+  eml_ctt     String?  @db.VarChar(50)
+  eml_frm     String?  @db.VarChar(50)
+  eml_frm_pwd String?  @db.VarChar(50)
+  fne_ctt     String?  @db.VarChar(20)
+  fne_wha     String?  @db.VarChar(20)
+  rss_ins     String?  @db.VarChar(100)
+  rss_fac     String?  @db.VarChar(100)
+  rss_twi     String?  @db.VarChar(100)
+  rss_you     String?  @db.VarChar(100)
+  pix_tpo     String?  @db.Char(1)
+  pix_chv     String?  @db.VarChar(150)
+  pix_qr_img  String?  @db.VarChar(150)
+  pix_qr_cpy  String?  @db.VarChar(150)
+  stt_id      Int      @default(1)
+  usr_id_alt  Int
+  dta_alt     DateTime @default(now()) @db.Timestamp(6)
+  mtv_del     String?  @db.VarChar(250)
+  stt         stt      @relation(fields: [stt_id], references: [stt_id], onUpdate: Restrict, map: "fk_emp_stt")
+
+  @@schema("cad")
+}
+
+model stt {
+  stt_id     Int       @id @default(autoincrement())
+  stt_nme    String    @db.VarChar(50)
+  stt_id_atu Int       @default(1)
+  usr_id_alt Int
+  dta_alt    DateTime  @default(now()) @db.Timestamptz(6)
+  mtv_del    String?   @db.VarChar(250)
+  prm        prm[]
+  usr        usr[]
+  usr_tpo    usr_tpo[]
+  emp        emp[]
+
+  @@index([stt_nme], map: "idx_stt_nme")
+  @@schema("cad")
+}
+
+model dim_brt {
+  brt_sk     BigInt      @id @default(autoincrement())
+  brt_id     Int         @unique(map: "ux_dim_brt_nk")
+  brt_nme    String      @unique(map: "ux_dim_brt_name") @db.VarChar(50)
+  stt_sk     BigInt?
+  usr_id_alt Int
+  dta_alt    DateTime    @default(now()) @db.Timestamptz(6)
+  dim_status dim_status? @relation(fields: [stt_sk], references: [stt_sk], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("dsh")
+}
+
+model dim_data {
+  dta_sk      BigInt   @id @default(autoincrement())
+  dta         DateTime @unique @db.Date
+  ano         Int      @db.SmallInt
+  sem         Int      @db.SmallInt
+  tri         Int      @db.SmallInt
+  mes         Int      @db.SmallInt
+  mes_nme     String   @db.VarChar(20)
+  mes_rdz     String   @db.VarChar(3)
+  ano_mes     Int
+  sem_ano     Int      @db.SmallInt
+  dia_mes     Int      @db.SmallInt
+  dia_ano     Int      @db.SmallInt
+  dia_sem     Int      @db.SmallInt
+  dia_sem_nme String   @db.VarChar(20)
+  fim_sem     Boolean
+  fer         Boolean? @default(false)
+  dia_tpo     Int      @db.SmallInt
+
+  @@index([ano_mes], map: "idx_dim_data_ano_mes")
+  @@index([dta], map: "idx_dim_data_dta")
+  @@index([sem_ano], map: "idx_dim_data_semana")
+  @@schema("dsh")
+}
+
+model dim_empresa {
+  emp_sk     BigInt      @id @default(autoincrement())
+  emp_id     Int         @unique(map: "ux_dim_empresa_current")
+  emp_nme    String      @db.VarChar(150)
+  emp_rdz    String?     @db.VarChar(15)
+  emp_cnpj   String?     @db.VarChar(20)
+  stt_sk     BigInt?
+  usr_id_alt Int
+  dta_alt    DateTime    @default(now()) @db.Timestamptz(6)
+  dim_status dim_status? @relation(fields: [stt_sk], references: [stt_sk], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("dsh")
+}
+
+model dim_indicador {
+  ind_sk              BigInt               @id @default(autoincrement())
+  ind_id              Int                  @unique(map: "ux_dim_ind_nk")
+  ind_grp_sk          BigInt?
+  ind_nme             String               @unique(map: "ux_dim_ind_name") @db.VarChar(100)
+  ind_sgl             String?              @db.VarChar(10)
+  ind_dtl             String?              @db.VarChar(250)
+  stt_sk              BigInt?
+  usr_id_alt          Int
+  dta_alt             DateTime             @default(now()) @db.Timestamptz(6)
+  dim_indicador_grupo dim_indicador_grupo? @relation(fields: [ind_grp_sk], references: [ind_grp_sk], onDelete: NoAction, onUpdate: NoAction)
+  dim_status          dim_status?          @relation(fields: [stt_sk], references: [stt_sk], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([ind_grp_sk], map: "idx_dim_ind_grp")
+  @@schema("dsh")
+}
+
+model dim_indicador_categoria {
+  ind_ctg_sk  BigInt      @id @default(autoincrement())
+  ind_ctg_id  Int         @unique(map: "ux_dim_ind_ctg_nk")
+  ind_ctg_nme String      @unique(map: "ux_dim_ind_ctg_name") @db.VarChar(150)
+  stt_sk      BigInt?
+  usr_id_alt  Int
+  dta_alt     DateTime    @default(now()) @db.Timestamptz(6)
+  dim_status  dim_status? @relation(fields: [stt_sk], references: [stt_sk], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("dsh")
+}
+
+model dim_indicador_grupo {
+  ind_grp_sk    BigInt          @id @default(autoincrement())
+  ind_grp_id    Int             @unique(map: "ux_dim_ind_grp_nk")
+  ind_grp_nme   String          @unique(map: "ux_dim_ind_grp_name") @db.VarChar(50)
+  stt_sk        BigInt?
+  usr_id_alt    Int
+  dta_alt       DateTime        @default(now()) @db.Timestamptz(6)
+  dim_indicador dim_indicador[]
+  dim_status    dim_status?     @relation(fields: [stt_sk], references: [stt_sk], onDelete: NoAction, onUpdate: NoAction)
+
+  @@schema("dsh")
+}
+
+model dim_status {
+  stt_sk                  BigInt                    @id @default(autoincrement())
+  stt_id                  Int                       @unique(map: "ux_dim_status_nk")
+  stt_nme                 String                    @db.VarChar(50)
+  usr_id_alt              Int
+  dta_alt                 DateTime                  @default(now()) @db.Timestamptz(6)
+  dim_brt                 dim_brt[]
+  dim_empresa             dim_empresa[]
+  dim_indicador           dim_indicador[]
+  dim_indicador_categoria dim_indicador_categoria[]
+  dim_indicador_grupo     dim_indicador_grupo[]
+
+  @@schema("dsh")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model fat_indicador {
+  id         BigInt   @default(autoincrement())
+  ind_grp_sk BigInt?
+  ind_sk     BigInt?
+  brt_sk     BigInt?
+  ind_ctg_sk BigInt?
+  dta_sk     BigInt?
+  vlr        Decimal? @db.Decimal(18, 6)
+  stt_sk     BigInt?
+  usr_id_alt Int
+  dta_alt    DateTime @default(now()) @db.Timestamptz(6)
+
+  @@index([ind_ctg_sk], map: "idx_fat_ind_ctg_par")
+  @@index([ind_grp_sk], map: "idx_fat_ind_grp_par")
+  @@index([brt_sk], map: "idx_fat_indicador_brt_sk")
+  @@index([dta_sk], map: "idx_fat_indicador_dta_sk")
+  @@index([ind_sk], map: "idx_fat_indicador_ind_sk")
+  @@ignore
+  @@schema("dsh")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model tmp_indicador {
+  ind_ctg String  @db.VarChar(50)
+  ind_nme String  @db.VarChar(150)
+  brt_nme String  @db.VarChar(50)
+  sub_grp String? @db.VarChar(150)
+  dta_sk  Int
+  vlr     Float?
+
+  @@index([brt_nme], map: "idx_tmp_brt_nme")
+  @@index([dta_sk], map: "idx_tmp_dta_sk")
+  @@index([ind_ctg], map: "idx_tmp_ind_ctg")
+  @@index([ind_nme], map: "idx_tmp_ind_nme")
+  @@index([sub_grp], map: "idx_tmp_sub_grp")
+  @@ignore
+  @@schema("dsh")
+}
+
+// view - Schema "dsh"
+model vw_indicadores_smb {
+  categoria String
+  indicador String
+  brt       String
+  grupo     String
+  periodo   String
+  valor     Decimal?
+
+  @@id([categoria, indicador, brt, grupo, periodo]) // chave composta
+  @@schema("dsh")
+  @@map("vw_indicadores_smb")
+}

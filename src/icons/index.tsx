@@ -51,6 +51,18 @@ import HorizontaLDots from "./horizontal-dots.svg";
 import ChatIcon from "./chat.svg";
 import MoreDotIcon from "./more-dot.svg";
 import BellIcon from "./bell.svg";
+import Settings from "./settings.svg";
+import { Cog } from "lucide-react";
+import NansenSVG from "./nansen.svg";
+import HPSVG from "./hp.svg";
+
+export const HPIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <HPSVG className="h-5 w-5" {...props} />
+);
+
+export const NansenIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <NansenSVG className="h-5 w-5" {...props} />
+);
 
 export {
   DownloadIcon,
@@ -106,4 +118,6 @@ export {
   HorizontaLDots,
   ChevronUpIcon,
   ChatIcon,
+  Settings,
+  Cog,
 };
