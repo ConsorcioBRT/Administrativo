@@ -1,8 +1,8 @@
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import PassageirosTipoLO from "@/components/indicadores/demanda/passageirostipo/PassageirosTipoLO";
-import PassageirosTipoNS from "@/components/indicadores/demanda/passageirostipo/PassageirosTipoNS";
-import PassageirosTipoSMB from "@/components/indicadores/demanda/passageirostipo/PassageirosTipoSMB";
+import IpkMesLO from "@/components/indicadores/demanda/ipkmes/IpkMesLO";
+import IpkMesNS from "@/components/indicadores/demanda/ipkmes/IpkMesNS";
+import IpkMesSMB from "@/components/indicadores/demanda/ipkmes/IpkMesSMB";
 import { Metadata } from "next";
 import React from "react";
 
@@ -14,18 +14,18 @@ export const metadata: Metadata = {
 export default function page() {
   return (
     <div>
-      <PageBreadcrumb pageTitle="Passageiros por tipo/dia" />
+      <PageBreadcrumb pageTitle="IPK por Mês" />
       <div className="space-y-6">
         <ComponentCard title="BRT Norte Sul">
-          <PassageirosTipoNS />
+          <IpkMesNS />
         </ComponentCard>
 
         <ComponentCard title="BRT Leste Oeste">
-          <PassageirosTipoLO />
+          <IpkMesLO />
         </ComponentCard>
 
         <ComponentCard title="SMB">
-          <PassageirosTipoSMB />
+          <IpkMesSMB />
         </ComponentCard>
       </div>
     </div>

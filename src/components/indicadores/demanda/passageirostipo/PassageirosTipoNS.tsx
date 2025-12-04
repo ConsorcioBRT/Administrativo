@@ -4,17 +4,25 @@ import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { usePassageirosTipo } from "@/hooks/usePassageirosTipo";
 import { useFiltros } from "@/hooks/useFiltrosPassageirosTipo";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 // Dynamically import the ReactApexChart component
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function PassageirosTipoLO() {
+export default function PassageirosTipoNS() {
   const { loading: filtrosLoading } = useFiltros();
   const [selected] = useState({
     categoria: "Demanda",
     indicador: "Passageiro por tipo dia",
-    brt: "BRT Leste Oeste",
+    brt: "BRT Norte Sul",
     grupo: "",
   });
 
@@ -37,6 +45,16 @@ export default function PassageirosTipoLO() {
       toolbar: { show: false },
       fontFamily: "Outfit, sans-serif",
     },
+    colors: ["#465fff", "#81BF2A", "#A952D1"], // azul, verde e rosa
+    plotOptions: {
+      bar: {
+        columnWidth: "45%",
+        borderRadius: 2,
+        dataLabels: {
+          position: "top",
+        },
+      },
+    },
     legend: {
       show: true,
       position: "top",
@@ -45,16 +63,6 @@ export default function PassageirosTipoLO() {
       itemMargin: {
         horizontal: 10,
         vertical: 5,
-      },
-    },
-    colors: ["#D1883B", "#106BEF", "#90D431"], // laranja, azul e verde
-    plotOptions: {
-      bar: {
-        columnWidth: "45%",
-        borderRadius: 2,
-        dataLabels: {
-          position: "top",
-        },
       },
     },
     dataLabels: {
@@ -101,22 +109,27 @@ export default function PassageirosTipoLO() {
       />
       {/* LEGENDA CUSTOMIZADA + TABELA */}
       <div className="mt-4 w-full overflow-x-auto">
-        <table className="w-full table-fixed text-sm">
-          <thead>
-            <tr>
-              <th className="w-32 p-2 text-left">Meses</th>
-              {meses.map((mes) => (
-                <th key={mes} className="p-2 text-center">
-                  {mes}
-                </th>
-              ))}
-            </tr>
-          </thead>
+        <Table className="table-fixed border text-sm">
+          {/* Cabeçalho */}
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-32 border-r text-left">Meses</TableHead>
 
-          <tbody>
+              {meses.map((mes) => (
+                <TableHead key={mes} className="border-x text-center">
+                  {mes}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+
+          {/* Corpo */}
+          <TableBody>
             {series.map((s) => (
-              <tr key={s.name} className="border-t">
-                <td className="flex items-center gap-2 p-2">{s.name}</td>
+              <TableRow key={s.name} className="border-t">
+                <TableCell className="border-r font-semibold">
+                  {s.name}
+                </TableCell>
 
                 {meses.map((mes) => {
                   const valor =
@@ -124,15 +137,15 @@ export default function PassageirosTipoLO() {
                       ?.valor || 0;
 
                   return (
-                    <td key={mes} className="p-2 text-center">
+                    <TableCell key={mes} className="border-x text-center">
                       {Number(valor).toLocaleString("pt-BR")}
-                    </td>
+                    </TableCell>
                   );
                 })}
-              </tr>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       </div>
     </div>
   );

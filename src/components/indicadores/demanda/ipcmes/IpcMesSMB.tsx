@@ -4,17 +4,26 @@ import { ApexOptions } from "apexcharts";
 import dynamic from "next/dynamic";
 import { usePassageirosTipo } from "@/hooks/usePassageirosTipo";
 import { useFiltros } from "@/hooks/useFiltrosPassageirosTipo";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+
 // Dynamically import the ReactApexChart component
 const ReactApexChart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
 });
 
-export default function PassageirosMesLO() {
+export default function IpcMesSMB() {
   const { loading: filtrosLoading } = useFiltros();
   const [selected] = useState({
     categoria: "Demanda",
-    indicador: "Passageiro/mês",
-    brt: "BRT Leste Oeste",
+    indicador: "IPC - Passageiros por carro",
+    brt: "SMB",
     grupo: "",
   });
 
@@ -41,7 +50,7 @@ export default function PassageirosMesLO() {
         vertical: 5,
       },
     },
-    colors: ["#D1883B"],
+    colors: ["#90D431"],
     plotOptions: {
       bar: {
         columnWidth: "45%",
@@ -81,7 +90,7 @@ export default function PassageirosMesLO() {
     (mes) => lista.find((i) => i.periodo === mes)?.valor || 0,
   );
 
-  const series = [{ name: "Total do mês", data: totais }];
+  const series = [{ name: "IPK/Mês", data: totais }];
 
   if (filtrosLoading) return <p>Carregando...</p>;
   return (
@@ -95,34 +104,40 @@ export default function PassageirosMesLO() {
         />
         {/* LEGENDA CUSTOMIZADA + TABELA */}
         <div className="mt-4 w-full overflow-x-auto">
-          <table className="w-full table-fixed text-sm">
-            <thead>
-              <tr>
-                <th className="w-32 p-2 text-left">Meses</th>
-                {meses.map((mes) => (
-                  <th key={mes} className="p-2 text-center">
-                    {mes}
-                  </th>
-                ))}
-              </tr>
-            </thead>
+          <Table className="table-fixed border text-sm">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-32 border-x text-center">
+                  Meses
+                </TableHead>
 
-            <tbody>
-              <tr>
-                <td className="p-2 font-semibold">Total</td>
+                {meses.map((mes) => (
+                  <TableHead key={mes} className="border-x text-center">
+                    {mes}
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+
+            <TableBody>
+              <TableRow>
+                <TableCell className="border-x text-center font-semibold">
+                  Total
+                </TableCell>
+
                 {meses.map((mes) => {
                   const valor =
                     lista.find((i) => i.periodo === mes)?.valor || 0;
 
                   return (
-                    <td key={mes} className="p-2 text-center">
+                    <TableCell key={mes} className="border-x text-center">
                       {Number(valor).toLocaleString("pt-BR")}
-                    </td>
+                    </TableCell>
                   );
                 })}
-              </tr>
-            </tbody>
-          </table>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
       </div>
     </div>

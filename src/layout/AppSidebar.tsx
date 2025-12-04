@@ -133,6 +133,21 @@ const othersItems: NavItem[] = [
         path: "/passageiros-tipo",
         pro: false,
       },
+      {
+        name: "IPK/Mês",
+        path: "/ipk-mes",
+        pro: false,
+      },
+      {
+        name: "IPK por Tipo Dia",
+        path: "/ipk-dia",
+        pro: false,
+      },
+      {
+        name: "IPC/Mês",
+        path: "/ipc-mes",
+        pro: false,
+      },
     ],
   },
   {

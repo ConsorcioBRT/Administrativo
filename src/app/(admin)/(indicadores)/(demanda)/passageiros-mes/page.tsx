@@ -1,8 +1,8 @@
 import ComponentCard from "@/components/common/ComponentCard";
 import PageBreadcrumb from "@/components/common/PageBreadCrumb";
-import PassageirosMesLO from "@/components/indicadores/passageirosmes/PassageirosMesLO";
-import PassageirosMesNS from "@/components/indicadores/passageirosmes/PassageirosMesNS";
-import PassageirosMesSMB from "@/components/indicadores/passageirosmes/PassageirosMesSMB";
+import PassageirosMesLO from "@/components/indicadores/demanda/passageirosmes/PassageirosMesLO";
+import PassageirosMesNS from "@/components/indicadores/demanda/passageirosmes/PassageirosMesNS";
+import PassageirosMesSMB from "@/components/indicadores/demanda/passageirosmes/PassageirosMesSMB";
 import { Metadata } from "next";
 import React from "react";
 
