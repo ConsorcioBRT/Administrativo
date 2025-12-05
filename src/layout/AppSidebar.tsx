@@ -340,7 +340,7 @@ const AppSidebar: React.FC = () => {
                 height={40}
               />
               <Image
-                className="hidden rounded-lg md:block dark:block"
+                className="hidden rounded-lg dark:block"
                 src="/images/logo/logo-branca.png"
                 alt="Logo"
                 width={150}
