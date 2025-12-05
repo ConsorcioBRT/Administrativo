@@ -2,19 +2,23 @@ import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { prisma } from "@/lib/prisma";
 
-// Rota da api: http://localhost:3000/src/app/api/usr/id
-// GET - Vai listar apenas o usuário necessário
-export async function GET(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
+interface RouteParams {
+  params: {
+    id: string;
+  };
+}
+
+// GET - Buscar usuário por ID
+export async function GET(request: Request, context: RouteParams) {
   try {
-    if (!params.id) {
+    const { id } = context.params;
+
+    if (!id) {
       return NextResponse.json({ error: "ID não informado." }, { status: 400 });
     }
 
     const user = await prisma.usr.findUnique({
-      where: { usr_id: Number(params.id) },
+      where: { usr_id: Number(id) },
     });
 
     if (!user) {
@@ -34,35 +38,32 @@ export async function GET(
   }
 }
 
-// PUT - Vai alterar apenas o usuário escolhido
-export async function PUT(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
+// PUT - Atualizar usuário por ID
+export async function PUT(request: Request, context: RouteParams) {
   try {
+    const { id } = context.params;
     const body = await request.json();
 
-    // Aqui vai ser apenas se ela existir
     let hashedPassword: string | undefined;
 
     if (body.usr_pwd) {
-      // Aqui vamos criptografar a senha antes de salvar
       hashedPassword = await bcrypt.hash(body.usr_pwd, 10);
     }
 
     const atualizarUser = await prisma.usr.update({
-      where: { usr_id: Number(params.id) },
+      where: { usr_id: Number(id) },
       data: {
         usr_nme: body.usr_nme,
         usr_lgn: body.usr_lgn,
         usr_cpf: body.usr_cpf,
         usr_eml: body.usr_eml,
-        ...(hashedPassword && { usr_pwd: hashedPassword }), // irá adicionar se caso existir
+        ...(hashedPassword && { usr_pwd: hashedPassword }),
         usr_fne: body.usr_fne,
         usr_tpo_id: body.usr_tpo_id,
         stt_id: body.stt_id,
       },
     });
+
     return NextResponse.json(atualizarUser, { status: 200 });
   } catch (error) {
     console.error(error);
@@ -73,14 +74,13 @@ export async function PUT(
   }
 }
 
-// DELETE - Delete o usuário selecionado
-export async function DELETE(
-  request: Request,
-  { params }: { params: { id: string } },
-) {
+// DELETE - Remover usuário por ID
+export async function DELETE(request: Request, context: RouteParams) {
   try {
+    const { id } = context.params;
+
     await prisma.usr.delete({
-      where: { usr_id: Number(params.id) },
+      where: { usr_id: Number(id) },
     });
 
     return NextResponse.json(
@@ -90,7 +90,7 @@ export async function DELETE(
   } catch (error) {
     console.error(error);
     return NextResponse.json(
-      { error: "Erro ao deletar usuário" },
+      { error: "Erro ao deletar usuário." },
       { status: 500 },
     );
   }
