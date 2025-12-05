@@ -16,15 +16,15 @@ export default function page() {
     <div>
       <PageBreadcrumb pageTitle="IPK por Mês" />
       <div className="space-y-6">
-        <ComponentCard title="BRT Norte Sul">
+        <ComponentCard title="BRT Norte Sul" headerBg="bg-[#D1883B]">
           <IpkMesNS />
         </ComponentCard>
 
-        <ComponentCard title="BRT Leste Oeste">
+        <ComponentCard title="BRT Leste Oeste" headerBg="bg-[#90D431]">
           <IpkMesLO />
         </ComponentCard>
 
-        <ComponentCard title="SMB">
+        <ComponentCard title="SMB" headerBg="bg-[#106BEF]">
           <IpkMesSMB />
         </ComponentCard>
       </div>

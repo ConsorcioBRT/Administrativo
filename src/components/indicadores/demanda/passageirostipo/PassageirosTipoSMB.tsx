@@ -45,10 +45,10 @@ export default function PassageirosTipoSMB() {
       toolbar: { show: false },
       fontFamily: "Outfit, sans-serif",
     },
-    colors: ["#90D431", "#CB7EF2", "#3480D1"], // verde, rosa e azul
+    colors: ["#465fff", "#81BF2A", "#D1883B", "#A8A8A8"], // azul, verde, rosa e cinza
     plotOptions: {
       bar: {
-        columnWidth: "45%",
+        columnWidth: "80%",
         borderRadius: 2,
         dataLabels: {
           position: "top",
@@ -88,7 +88,7 @@ export default function PassageirosTipoSMB() {
       axisBorder: { show: true },
       axisTicks: { show: true },
       labels: { show: true },
-      tickAmount: 10,
+      tickAmount: 6,
     },
   };
 
@@ -96,57 +96,65 @@ export default function PassageirosTipoSMB() {
     { name: "Útil", data: valores("Útil") },
     { name: "Sábado", data: valores("Sábado") },
     { name: "Domingo/Feriado", data: valores("Domingo/Feriado") },
+    { name: "Atípico", data: valores("Atípico") },
   ];
 
   if (filtrosLoading) return <p>Carregando...</p>;
   return (
-    <div>
-      {/* GRÁFICO */}
-      <ReactApexChart
-        options={options}
-        series={series}
-        type="bar"
-        height={350}
-      />
-      {/* LEGENDA CUSTOMIZADA + TABELA */}
-      <div className="mt-4 w-full overflow-x-auto">
-        <Table className="table-fixed border text-sm">
-          {/* Cabeçalho */}
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-32 border-r text-left">Meses</TableHead>
+    <div className="custom-scrollbar max-w-full overflow-x-auto">
+      <div id="chartOne" className="min-w-[1000px]">
+        <ReactApexChart
+          options={options}
+          series={series}
+          type="bar"
+          height={250}
+        />
+        {/* LEGENDA CUSTOMIZADA + TABELA */}
+        <div className="mt-1 hidden w-full overflow-x-auto md:block">
+          <Table className="table-fixed border text-sm">
+            {/* Cabeçalho */}
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-32 border-r text-left">Meses</TableHead>
 
-              {meses.map((mes) => (
-                <TableHead key={mes} className="border-x text-center">
-                  {mes}
-                </TableHead>
-              ))}
-            </TableRow>
-          </TableHeader>
-
-          {/* Corpo */}
-          <TableBody>
-            {series.map((s) => (
-              <TableRow key={s.name} className="border-t">
-                <TableCell className="border-r font-semibold">
-                  {s.name}
-                </TableCell>
-
-                {meses.map((mes) => {
-                  const valor =
-                    data.find((i) => i.periodo === mes && i.grupo === s.name)
-                      ?.valor || 0;
-
-                  return (
-                    <TableCell key={mes} className="border-x text-center">
-                      {Number(valor).toLocaleString("pt-BR")}
-                    </TableCell>
-                  );
-                })}
+                {meses.map((mes) => (
+                  <TableHead
+                    key={mes}
+                    className="border-x text-center text-xs font-semibold"
+                  >
+                    {mes}
+                  </TableHead>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+
+            {/* Corpo */}
+            <TableBody>
+              {series.map((s) => (
+                <TableRow key={s.name} className="border-t">
+                  <TableCell className="border-r text-xs font-semibold">
+                    {s.name}
+                  </TableCell>
+
+                  {meses.map((mes) => {
+                    const valor =
+                      data.find((i) => i.periodo === mes && i.grupo === s.name)
+                        ?.valor || 0;
+
+                    return (
+                      <TableCell
+                        key={mes}
+                        className="border-x text-center text-xs"
+                      >
+                        {Number(valor).toLocaleString("pt-BR")}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );

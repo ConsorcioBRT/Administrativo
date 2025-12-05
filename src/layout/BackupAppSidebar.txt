@@ -10,7 +10,10 @@ import {
   Cog,
   GridIcon,
   HorizontaLDots,
+  HPIcon,
   NansenIcon,
+  PageIcon,
+  PieChartIcon,
   PlugInIcon,
 } from "../icons/index";
 
@@ -26,6 +29,12 @@ const navItems: NavItem[] = [
     icon: <GridIcon />,
     name: "Dashboard",
     subItems: [{ name: "Painel Principal", path: "/dashboard", pro: false }],
+  },
+
+  {
+    name: "HP Transporte",
+    icon: <HPIcon />,
+    subItems: [{ name: "Form Elements", path: "/form-elements", pro: false }],
   },
   {
     name: "Nansen",
@@ -73,13 +82,46 @@ const navItems: NavItem[] = [
       },
     ],
   },
+  {
+    name: "Pages",
+    icon: <PageIcon />,
+    subItems: [
+      { name: "Blank Page", path: "/blank", pro: false },
+      { name: "404 Error", path: "/error-404", pro: false },
+    ],
+  },
 ];
 
 const othersItems: NavItem[] = [
   {
+    icon: <PieChartIcon />,
+    name: "Gráficos",
+    subItems: [
+      { name: "Line Chart", path: "/line-chart", pro: false },
+      { name: "Bar Chart", path: "/bar-chart", pro: false },
+      {
+        name: "Controle de Velocidade",
+        path: "/controle-velocidade",
+        pro: false,
+      },
+      { name: "Operação Elétrica", path: "/operacao-eletrica" },
+      { name: "Disponibilidade de Veículos", path: "disponiveis-veiculos" },
+      { name: "Nova Pesquisa Ônibus", path: "nova-pesquisa-onibus" },
+      { name: "Pesquisa Biometano", path: "/pesquisa-biometano" },
+      { name: "Pesquisa Usuário BRT", path: "pesquisa-usuario-brt" },
+    ],
+  },
+  {
     icon: <BoxCubeIcon />,
     name: "Usuários",
-    subItems: [{ name: "Usuários", path: "/users", pro: false }],
+    subItems: [
+      { name: "Usuários", path: "/users", pro: false },
+      { name: "Avatar", path: "/avatars", pro: false },
+      { name: "Badge", path: "/badge", pro: false },
+      { name: "Buttons", path: "/buttons", pro: false },
+      { name: "Images", path: "/images", pro: false },
+      { name: "Videos", path: "/videos", pro: false },
+    ],
   },
   {
     icon: <PlugInIcon />,
@@ -333,14 +375,14 @@ const AppSidebar: React.FC = () => {
           {isExpanded || isHovered || isMobileOpen ? (
             <>
               <Image
-                className="hidden md:block dark:hidden"
+                className="dark:hidden"
                 src="/images/logo/logo-preta.png"
                 alt="Logo"
                 width={150}
                 height={40}
               />
               <Image
-                className="hidden rounded-lg md:block dark:block"
+                className="hidden rounded-lg dark:block"
                 src="/images/logo/logo-branca.png"
                 alt="Logo"
                 width={150}

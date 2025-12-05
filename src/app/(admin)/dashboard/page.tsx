@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { EcommerceMetrics } from "@/components/ecommerce/EcommerceMetrics";
 import React from "react";
 import MonthlySalesChart from "@/components/ecommerce/FaturamentoChart";
-import StatisticsChart from "@/components/ecommerce/StatisticsChart";
-import RecentOrders from "@/components/ecommerce/RecentOrders";
-import DemographicCard from "@/components/ecommerce/DemographicCard";
+import MapaCharts from "@/components/ecommerce/MapaChart";
+import DisponibilidadeConectores from "@/components/ecommerce/DisponibilidadeConectoresChart";
+import RecargasPorPeriodo from "@/components/ecommerce/RecargasPorPeriodoChart";
+import TempoPermanencia from "@/components/ecommerce/TempoPermanenciaChart";
+import EnergiaInstantaneaChart from "@/components/ecommerce/EnergiaInstantaneaChart";
+import PotenciaInstantaneaChart from "@/components/ecommerce/PotenciaInstantaneaChart";
 
 export const metadata: Metadata = {
   title: "Consórcio BRT",
@@ -17,19 +20,21 @@ export default function Ecommerce() {
       <div className="col-span-12 space-y-6">
         <EcommerceMetrics />
 
-        <MonthlySalesChart />
+        <div className="grid grid-cols-3 gap-4">
+          <MonthlySalesChart />
+          <MapaCharts />
+          <DisponibilidadeConectores />
+        </div>
       </div>
 
-      <div className="col-span-12">
-        <StatisticsChart />
+      <div className="col-span-12 grid grid-cols-2 gap-4">
+        <RecargasPorPeriodo />
+        <TempoPermanencia />
       </div>
 
-      <div className="col-span-12 xl:col-span-5">
-        <DemographicCard />
-      </div>
-
-      <div className="col-span-12 xl:col-span-7">
-        <RecentOrders />
+      <div className="col-span-12 grid grid-cols-2 gap-4">
+        <EnergiaInstantaneaChart />
+        <PotenciaInstantaneaChart />
       </div>
     </div>
   );

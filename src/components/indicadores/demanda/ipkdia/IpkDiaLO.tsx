@@ -55,10 +55,10 @@ export default function IpkDiaLO() {
         vertical: 5,
       },
     },
-    colors: ["#D1883B", "#106BEF", "#90D431"], // laranja, azul e verde
+    colors: ["#465fff", "#81BF2A", "#D1883B"], // azul, verde, laranja
     plotOptions: {
       bar: {
-        columnWidth: "45%",
+        columnWidth: "65%",
         borderRadius: 2,
         dataLabels: {
           position: "top",
@@ -87,7 +87,7 @@ export default function IpkDiaLO() {
       axisBorder: { show: true },
       axisTicks: { show: true },
       labels: { show: true },
-      tickAmount: 10,
+      tickAmount: 6,
     },
   };
 
@@ -100,16 +100,15 @@ export default function IpkDiaLO() {
   if (filtrosLoading) return <p>Carregando...</p>;
   return (
     <div className="custom-scrollbar max-w-full overflow-x-auto">
-      <div id="chartOne" className="min-w-[1000px]">
-        {/* GRÁFICO */}
+      <div id="chartOne" className="w-full">
         <ReactApexChart
           options={options}
           series={series}
           type="bar"
-          height={350}
+          height={250}
         />
         {/* LEGENDA CUSTOMIZADA + TABELA */}
-        <div className="mt-4 w-full overflow-x-auto">
+        <div className="mt-1 hidden w-full overflow-x-auto md:block">
           <Table className="table-fixed border text-sm">
             {/* Cabeçalho */}
             <TableHeader>
@@ -117,7 +116,10 @@ export default function IpkDiaLO() {
                 <TableHead className="w-32 border-r text-left">Meses</TableHead>
 
                 {meses.map((mes) => (
-                  <TableHead key={mes} className="border-x text-center">
+                  <TableHead
+                    key={mes}
+                    className="border-x text-center text-xs font-semibold"
+                  >
                     {mes}
                   </TableHead>
                 ))}
@@ -128,7 +130,7 @@ export default function IpkDiaLO() {
             <TableBody>
               {series.map((s) => (
                 <TableRow key={s.name} className="border-t">
-                  <TableCell className="border-r font-semibold">
+                  <TableCell className="border-r text-xs font-semibold">
                     {s.name}
                   </TableCell>
 
@@ -138,7 +140,10 @@ export default function IpkDiaLO() {
                         ?.valor || 0;
 
                     return (
-                      <TableCell key={mes} className="border-x text-center">
+                      <TableCell
+                        key={mes}
+                        className="border-x text-center text-xs"
+                      >
                         {Number(valor).toLocaleString("pt-BR")}
                       </TableCell>
                     );

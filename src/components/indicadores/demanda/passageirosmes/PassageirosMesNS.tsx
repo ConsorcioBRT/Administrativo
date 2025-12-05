@@ -77,11 +77,23 @@ export default function PassageirosMesNS() {
       axisTicks: { show: false },
       tooltip: { enabled: true },
     },
+    responsive: [
+      {
+        breakpoint: 640,
+        options: {
+          plotOptions: {
+            bar: {
+              columnWidth: "60%",
+            },
+          },
+        },
+      },
+    ],
     yaxis: {
       axisBorder: { show: true },
       axisTicks: { show: true },
       labels: { show: true },
-      tickAmount: 10,
+      tickAmount: 6,
     },
   };
 
@@ -94,22 +106,27 @@ export default function PassageirosMesNS() {
   if (filtrosLoading) return <p>Carregando...</p>;
   return (
     <div className="custom-scrollbar max-w-full overflow-x-auto">
-      <div id="chartOne" className="min-w-[1000px]">
+      <div id="chartOne" className="w-full">
         <ReactApexChart
           options={options}
           series={series}
           type="bar"
-          height={350}
+          height={250}
         />
         {/* LEGENDA CUSTOMIZADA + TABELA */}
-        <div className="mt-4 w-full overflow-x-auto">
+        <div className="mt-1 hidden w-full overflow-x-auto md:block">
           <Table className="table-fixed border text-sm">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-32 border-x text-center">Meses</TableHead>
+                <TableHead className="w-32 border-x text-center">
+                  Meses
+                </TableHead>
 
                 {meses.map((mes) => (
-                  <TableHead key={mes} className="text-center border-x">
+                  <TableHead
+                    key={mes}
+                    className="border-x text-center text-xs font-semibold"
+                  >
                     {mes}
                   </TableHead>
                 ))}
@@ -118,14 +135,19 @@ export default function PassageirosMesNS() {
 
             <TableBody>
               <TableRow>
-                <TableCell className="font-semibold border-x text-center">Total</TableCell>
+                <TableCell className="border-x text-center text-xs font-semibold">
+                  Total
+                </TableCell>
 
                 {meses.map((mes) => {
                   const valor =
                     lista.find((i) => i.periodo === mes)?.valor || 0;
 
                   return (
-                    <TableCell key={mes} className="text-center border-x">
+                    <TableCell
+                      key={mes}
+                      className="border-x text-center text-xs"
+                    >
                       {Number(valor).toLocaleString("pt-BR")}
                     </TableCell>
                   );
