@@ -68,46 +68,25 @@ export default function CarregadoresMapa() {
           <Table>
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   ID
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Empresa
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Nome
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Latitude
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Longitude
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Status
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Count
                 </TableCell>
               </TableRow>

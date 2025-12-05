@@ -128,28 +128,16 @@ export default function RecentOrders() {
           {/* Table Header */}
           <TableHeader className="border-y border-gray-100 dark:border-gray-800">
             <TableRow>
-              <TableCell
-                isHeader
-                className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-              >
+              <TableCell className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                 Products
               </TableCell>
-              <TableCell
-                isHeader
-                className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-              >
+              <TableCell className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                 Category
               </TableCell>
-              <TableCell
-                isHeader
-                className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-              >
+              <TableCell className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                 Price
               </TableCell>
-              <TableCell
-                isHeader
-                className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-              >
+              <TableCell className="text-theme-xs py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                 Status
               </TableCell>
             </TableRow>

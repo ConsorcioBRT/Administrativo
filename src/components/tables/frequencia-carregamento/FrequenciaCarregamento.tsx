@@ -130,46 +130,25 @@ export default function FrequenciaCarregamento() {
           <Table>
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Hora
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Semana
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Receita Semana
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Sábado
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Receita Sábado
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Domingo
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Receita Domingo
                 </TableCell>
               </TableRow>

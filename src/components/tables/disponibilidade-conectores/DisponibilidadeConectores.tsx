@@ -65,34 +65,19 @@ export default function DisponibilidadeConectores() {
           <Table>
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Available
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Occupied
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Unavailable
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Online
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-start font-medium text-gray-500 dark:text-gray-400">
                   Total
                 </TableCell>
               </TableRow>

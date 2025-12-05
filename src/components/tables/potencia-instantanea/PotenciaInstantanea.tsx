@@ -103,28 +103,16 @@ export default function PotenciaInstantanea() {
           <Table>
             <TableHeader className="border-b border-gray-100 dark:border-white/[0.05]">
               <TableRow>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Horário
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Ativa (kW)
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Reativa (kVAR)
                 </TableCell>
-                <TableCell
-                  isHeader
-                  className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400"
-                >
+                <TableCell className="text-theme-xs px-5 py-3 text-center font-medium text-gray-500 dark:text-gray-400">
                   Aparente (kVA)
                 </TableCell>
               </TableRow>
